@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     // hyppääminen
     public float jumpForce = 1f;
 
+    // animaatio
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
         {
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+        // animaatio
+        animator.SetFloat("speed", Mathf.Abs(horizontalMovement));
     }
     void FixedUpdate()
     {
