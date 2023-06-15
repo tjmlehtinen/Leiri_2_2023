@@ -251,6 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387368022}
   - component: {fileID: 387368021}
+  - component: {fileID: 387368023}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -323,6 +324,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &387368023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387368020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fd9b2ab81c3e74e8fbace433a470cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBall: {fileID: 8232199177368088548, guid: 351fbcfa7afaf614b9a6315d5dad06ec, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
