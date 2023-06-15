@@ -7,14 +7,19 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D body;
     // input-muuttujat
     private float horizontalMovement;
+    private float verticalMovement;
 
     // liikkumismuuttujat
     private float moveSpeed = 5f;
     private Vector2 movement = new Vector2();
 
-    // hyppääminen
+    // hyppäämismuuttujat
     public float jumpForce = 5f;
     private bool grounded;
+
+    // kiipeämismuuttujat
+    private bool canClimb;
+    private bool isClimbing;
 
     // animaatio
     public Animator animator;
@@ -29,12 +34,32 @@ public class PlayerController : MonoBehaviour
     {
         // input
         horizontalMovement = Input.GetAxisRaw("Horizontal");
+        verticalMovement = Input.GetAxisRaw("Vertical");
         //Debug.Log(horizontalMovement);
         movement.x = horizontalMovement * moveSpeed;
         // hyppääminen
         if (Input.GetButtonDown("Jump") && grounded)
         {
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        // kiipeäminen
+        if (canClimb && verticalMovement != 0)
+        {
+            isClimbing = true;
+        }
+        else
+        {
+            isClimbing = false;
+        }
+        if (isClimbing)
+        {
+            movement.y = verticalMovement * moveSpeed;
+            body.isKinematic = true;
+        }
+        else
+        {
+            movement.y = 0;
+            body.isKinematic = false;
         }
         // hahmon kääntäminen
         if (horizontalMovement > 0)
@@ -58,12 +83,20 @@ public class PlayerController : MonoBehaviour
         {
             grounded = true;
         }
+        if (collision.gameObject.CompareTag("Ladder"))
+        {
+            canClimb = true;
+        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
             grounded = false;
+        }
+        if (collision.gameObject.CompareTag("Ladder"))
+        {
+            canClimb = false;
         }
     }
 }
